@@ -189,7 +189,7 @@ the `account` will be hard-coded as `XXX` and the `warehouse` will be hard-coded
 `PROJECT_WH`.
 
 
-## $${\color{orange}Experimental Feature (Automatic Caching of Result Sets)}$$
+## *Experimental Feature (Automatic Caching of Result Sets)*
 It is a best practice in Streamlit to cache data that is retrieved
 from a data store so as to have a more responsive application. To support
 this, this package has a sub-package `st_snow.cached` to support automatically
