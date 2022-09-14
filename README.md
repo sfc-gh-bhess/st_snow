@@ -189,7 +189,7 @@ the `account` will be hard-coded as `XXX` and the `warehouse` will be hard-coded
 `PROJECT_WH`.
 
 
-## Experimental Feature (Automatic Caching of Result Sets)
+## $${\color{orange}Experimental Feature (Automatic Caching of Result Sets)}$$
 It is a best practice in Streamlit to cache data that is retrieved
 from a data store so as to have a more responsive application. To support
 this, this package has a sub-package `st_snow.cached` to support automatically
@@ -255,7 +255,7 @@ import st_snow
 
 ## Things above here will be run before (and after) you log in
 
-conn = st_snow.login.session()
+conn = st_snow.cached.login.session()
 
 ## Nothing below here will be run until you log in
 ```
