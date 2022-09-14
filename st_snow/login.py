@@ -60,18 +60,15 @@ def _snowflakeLoginForm(impl: Union[_session_api, _connection_api],
     with st.form("Snwoflake Credentials"):
         st.subheader("Snowflake Credentials")
         # Must have account, user, password
-        st.text_input("Account", value=form_options["account"] if "account" in form_options else "", key=f"{STSNOW_CREDENTIALS}account")
-        st.text_input("User", value=form_options["user"] if "user" in form_options else "", key=f"{STSNOW_CREDENTIALS}user")
-        st.text_input("Password", type="password", value=form_options["password"] if "password" in form_options else "", key=f"{STSNOW_CREDENTIALS}password")
-        if "account" in form_options:
-            del form_options["account"]
-        if "user" in form_options:
-            del form_options["user"]
-        if "password" in form_options:
-            del form_options["password"]
+        if "account" not in options:
+            st.text_input("Account", value=form_options["account"] if "account" in form_options else "", key=f"{STSNOW_CREDENTIALS}account")
+        if "user" not in options:
+            st.text_input("User", value=form_options["user"] if "user" in form_options else "", key=f"{STSNOW_CREDENTIALS}user")
+        if "password" not in options:
+            st.text_input("Password", type="password", value=form_options["password"] if "password" in form_options else "", key=f"{STSNOW_CREDENTIALS}password")
 
         # Generate form for other options
-        for k,v in form_options.items():
+        for k,v in {key:val for key,val in form_options.items() if key not in ["account", "user", "password"]}.items():
             st.text_input(k.capitalize(), value=v, key=f"{STSNOW_CREDENTIALS}{k}")
         st.form_submit_button("Connect", on_click=_callbackAndClear, args=(impl.connect, STSNOW_CREDENTIALS, options),)
     st.stop()

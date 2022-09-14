@@ -8,8 +8,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="st_snow",
-    package_dir={"": "src"},
-    packages=find_packages(where="src"),
+    packages=find_packages(),
     version='0.0.1',
     description='Helper tools for connecting to Snowflake from Streamlit',
     long_description=long_description,
