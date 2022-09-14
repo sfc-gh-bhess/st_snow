@@ -201,7 +201,9 @@ in the cache) then the cached result will be returned instead of retrieving it f
 Snowflake). The SQL must be identical - including parameters, etc.
 
 All results are cached in the user's `st.session_state`. That is, there is no sharing of 
-results across sessions (in global state).
+results across sessions (in global state). Even in the singleton pattern the 
+results are stored in the user session. So, the Streamlit users will share connection
+to the databsae, but will have their one result set cache.
 
 To simplify the experience, this package provides a new class that derives from
 `snowflake.connector.SnowflakeConnection` and `snowflake.snowpark.Session` and 
