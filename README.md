@@ -210,6 +210,18 @@ To simplify the experience, this package provides a new class that derives from
 fully encapsulates the caching from the developer. The access methods are
 the same as above, but instead of `st_snow` you use `st_snow.cached`.
 
+Not all results can (or should) be cached, and some should have a timeout after
+which we will refresh the cache on next invocation. To support this, this library
+does 2 things:
+1. The default is not to cache at all, and, in fact, will use normal Snowflake
+connections and Snowpark Sessions. 
+2. You can set a time-to-live when creating the Snowflake connection or Snowpark
+Session by adding an additional option, the `ttl` option. This is specified in 
+number of seconds to keep the result set in cache. Once that time expires, the
+result set is removed from the cache, and the next invocation of that SQL will
+result in the query being processed again, with the result set then cached for
+a new `ttl` seconds.
+
 ### Singleton Connections
 The API is the same as above:
 
@@ -237,6 +249,35 @@ def connect_to_snowflake(fname):
 session = connect_to_snowflake("/path/to/json/credentials.json")
 ```
 
+To add a TTL (of, say 120 seconds for example), the above code can be changed as 
+follows:
+
+```
+import json
+import st_snow
+
+def connect_to_snowflake(fname):
+    snowcreds = json.load(open(fname, "r"))
+    snowcreds['ttl'] = 120
+    return st_snow.cached.singleton.connection(**snowcreds)
+
+conn = connect_to_snowflake("/path/to/json/credentials.json")
+```
+
+And
+
+```
+import json
+import st_snow
+
+def connect_to_snowflake(fname):
+    snowcreds = json.load(open(fname, "r"))
+    snowcreds['ttl'] = 120
+    return st_snow.cached.singleton.session(snowcreds)
+
+session = connect_to_snowflake("/path/to/json/credentials.json")
+```
+
 ### Login Form
 The API is the same as above:
 
@@ -258,6 +299,31 @@ import st_snow
 ## Things above here will be run before (and after) you log in
 
 conn = st_snow.cached.login.session()
+
+## Nothing below here will be run until you log in
+```
+
+To add a TTL (of, say 120 seconds for example), the above code can be changed as 
+follows, by adding it to the `options` dictionary:
+
+```
+import st_snow
+
+## Things above here will be run before (and after) you log in
+
+conn = st_snow.cached.login.connection({}, {'ttl': 120})
+
+## Nothing below here will be run until you log in
+```
+
+And
+
+```
+import st_snow
+
+## Things above here will be run before (and after) you log in
+
+conn = st_snow.cached.login.session({}, {'ttl': 120})
 
 ## Nothing below here will be run until you log in
 ```
