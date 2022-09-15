@@ -10,7 +10,7 @@ class _session_api:
     def is_open(self, s: Session) -> bool:
         return not s._conn._conn.is_closed()
 
-    def connect(self, c) -> Session:
+    def connect(self, c: Dict[str, Union[str,int]]) -> Session:
         session = Session.builder.configs(c).create()
         st.session_state[self.STKEY] = session
         return session
@@ -26,8 +26,8 @@ class _connection_api:
     def is_open(self, c: snowflake.connector.SnowflakeConnection) -> bool:
         return not c.is_closed()
 
-    def connect(self, **kwargs) -> snowflake.connector.SnowflakeConnection:
-        connection = snowflake.connector.connect(**kwargs)
+    def connect(self, c: Dict[str, Union[str,int]]) -> snowflake.connector.SnowflakeConnection:
+        connection = snowflake.connector.connect(**c)
         st.session_state[self.STKEY] = connection
         return connection
 
