@@ -41,7 +41,7 @@ def _callbackAndClear(callback, prefix, options) -> None:
         if v != "":
             options[k[len(prefix):]] = v
         del st.session_state[k]
-    callback(options)
+    callback(**options)
 
 STSNOW_CREDENTIALS = 'STSNOW_CREDENTIALS_'
 def _snowflakeLoginForm(impl: Union[_session_api, _connection_api], 
