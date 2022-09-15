@@ -4,6 +4,14 @@ This Python package helps users connect to Snowflake from Streamlit.
 It provides a number of approaches for various use cases, and has some
 best-practices built in.
 
+## Installation
+
+You can install directly from github with this command:
+```
+pip install git+https://github.com/sfc-gh-brianhess/st_snow.git
+```
+Note that python 3.8 is the only supported python version currently.
+
 ## Description
 
 Streamlit is a powerful data and visualization tool, and Snowflake is a
