@@ -57,7 +57,7 @@ def _snowflakeLoginForm(impl: Union[_session_api, _connection_api],
         form_options = {'account':'', 'user':'', 'password':''}
     if not options:
         options = {}
-    with st.form("Snwoflake Credentials"):
+    with st.form("Snowflake Credentials"):
         st.subheader("Snowflake Credentials")
         # Must have account, user, password
         if "account" not in options:
