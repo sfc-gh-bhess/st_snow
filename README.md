@@ -1,3 +1,6 @@
+# NEEDS TO BE UPDATED WITH NEW API
+
+
 # Snowflake Connection Tools for Streamlit
 
 This Python package helps users connect to Snowflake from Streamlit.
