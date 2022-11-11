@@ -8,7 +8,7 @@ best-practices built in.
 
 You can install directly from github with this command:
 ```
-pip install git+https://github.com/sfc-gh-brianhess/st_snow.git
+pip install git+https://github.com/sfc-gh-bhess/st_snow.git
 ```
 Note that python 3.8 is the only supported python version currently.
 
